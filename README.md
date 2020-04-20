@@ -17,3 +17,18 @@ Portfolio头文件， 需要stock_pool头文件
     2. 讨论一下进一步要不要用 typedef std::unordered_map<asset*, int> Position; 来控制具体交易信号.
         - 传入Account这样的Position,每个asset需要改变的股数
         - 重载Position的+/-运算符
+
+----------------------
+关于StockPool.h的使用demo:
+各ticker的csv文件保存在同一个文件夹下, 文件夹路径为std::string path
+先设置文件读取根目录: setDataFolder(path);
+设置std::vector<std::string> tickerList; (用大写的tickerName,eg: "AAPL")
+实例化: StockPool sp(tickerList);
+调用数据:
+   sp.getPrice("AAPL") # 返回AAPL的在StockPool里的完全数据:  std::map<std::string, std::map<boost::gregorian::date,double> >
+   sp.getPrice("AAPL").at(boost::gregorian::date{2020,4,1}) # 2020-04-01 AAPL adj close
+   sp.getPrice("AAPL","2020-04-01") # 同上,但不需要显示转换date
+   
+待完善:
+1) 是否需要函数来直接返回[start,end]的数据
+2) 是否考虑缺失值处理的问题
