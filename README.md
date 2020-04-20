@@ -25,9 +25,8 @@ Portfolio头文件， 需要stock_pool头文件
     + 设置std::vector<std::string> tickerList; (用大写的tickerName,eg: "AAPL")
     + 实例化: StockPool sp(tickerList);
     + 调用数据:
-        1. sp.getPrice("AAPL") # 返回AAPL的在StockPool里的完全数据:  std::map<std::string, std::map<boost::gregorian::date,double> >
-        2. sp.getPrice("AAPL").at(boost::gregorian::date{2020,4,1}) # 2020-04-01 AAPL adj close
-        3. sp.getPrice("AAPL","2020-04-01") # 同上,但不需要显示转换date
+        1. sp.getStock("AAPL") # 返回 asset* , 指向AAPL的实例
+        2. sp.getStock("AAPL")->get_price("2020-04-01") # 返回AAPL 2020-04-01 adj close
 
 - 待完善:
 1) 是否需要函数来直接返回[start,end]的数据
