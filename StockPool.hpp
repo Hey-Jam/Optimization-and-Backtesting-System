@@ -49,9 +49,9 @@ private:
 public:
     StockPool(std::vector<std::string> tickerList): size{tickerList.size()} {
         
-        asset* p=new asset [tickerList.size()];
-        
         for (auto itr=tickerList.begin();itr!=tickerList.end();++itr) {
+            
+            asset* p=new asset;
             
             std::string path=dataFolder;
             
@@ -61,7 +61,6 @@ public:
             
             p->set_price(thisPxData);
             stocks.insert(std::pair<std::string, asset*>(*itr,p));
-            p++;
             
         }
         
