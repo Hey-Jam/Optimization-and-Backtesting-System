@@ -27,18 +27,15 @@ typedef std::vector<boost::variant<int, std::string, double>> variVec;
 class Account
 {
 private:
-	Date today;	// current date in the backtesting period 在portfolio里实现
-	Date end;
 	double cash;	// cash account, only update when there is a transaction
 	double balance;	// update every tick
 	std::unordered_map<std::string, int> pos;	// record each ticker and its shares in the portfolio;
-	std::map<Date, variVec>* transaction_log;
-	std::map<Date, double>* balance_log;
+	std::map<Date, variVec> transaction_log;
+	std::map<Date, double> balance_log;
 
 public:
 	Account(Date,Date,double,std::vector<std::string>);
 	Account(const Account&);
-	~Account();
 
 	// getter
 	const double getCash() const {return cash;}
