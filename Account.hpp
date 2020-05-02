@@ -18,39 +18,44 @@ Account class is designed to rocord all the trading details while backtesting or
 #include <unordered_map>
 #include<boost/date_time/gregorian/gregorian.hpp>
 #include <boost/variant.hpp>
+#include <vector>
+#include "Portfolio.h"
 
 typedef boost::gregorian::date Date;
 typedef std::vector<boost::variant<int, std::string, double>> variVec;
-typedef std::unordered_map<asset*, int> Position;
 
 class Account
 {
 private:
-	Date today;	// current date in the backtesting period
+	Date today;	// current date in the backtesting period 在portfolio里实现
+	Date end;
 	double cash;	// cash account, only update when there is a transaction
 	double balance;	// update every tick
-	Position p;	// record each ticker and its shares in the portfolio;
+	std::unordered_map<std::string, int> pos;	// record each ticker and its shares in the portfolio;
 	std::map<Date, variVec>* transaction_log;
 	std::map<Date, double>* balance_log;
 
 public:
-	Account(Date,double, std::unordered_map<asset*, double>&);
-	Account(Account);
+	Account(Date,Date,double,std::vector<std::string>);
+	Account(const Account&);
 	~Account();
 
 	// getter
-	const Date getDate() const {return today;}
 	const double getCash() const {return cash;}
 	const double getBalance() const {return balance;}
-	const Position getPosition() const {return p;}
+	const std::unordered_map<std::string, int> getPosition() const {return pos;}
 	const std::map<Date, double>* getBalanceLog() const {return balance_log;}
 
 	// setter
-	void update(const date &);
-	void update(const date &, vector<double>* w);
+	void update(const Portfolio&);
 
-	// display trading details
-	void showTrasaction();
+	void showTrasaction();   // display trading details
+	void perfomanceSummary();
+	double maxDropdown();
+	double sharpe();
+	double volatility();
+	double alpha();
+	double beta();
 };
 
 #endif // ACCOUNT_CPP
