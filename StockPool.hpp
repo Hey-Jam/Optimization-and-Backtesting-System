@@ -15,24 +15,26 @@
 #include <utility>
 #include "Asset.h"
 #include <boost/date_time/gregorian/gregorian.hpp>
+#include <gsl/gsl_matrix.h>
 
 extern std::string dataFolder;
 
-void setDataFolder(std::string new_path) dataFolder=new_path;
+void setDataFolder(std::string new_path) {dataFolder=new_path;};
 
 // Extract dates and Adj Close from csv file
 void parse_csv(std::string csvPath, std::map<boost::gregorian::date,double>& series) {
     std::ifstream csv(csvPath);
     if (csv.fail()) std::cerr << "cannot open: " << csvPath << std::endl;
     
-    std::stringstream readline;
-    std::string s,date;
+    std::stringstream ss_readline;
+    std::string s,date,readline;
     double px;
     
     std::getline(csv,readline); //header
     while(std::getline(csv,readline)) {
-        std::getline(readline,date,',');
-        for (int i=0;i<5;++i) std::getline(readline,s,',');
+        ss_readline=std::stringstream(readline);
+        std::getline(ss_readline,date,',');
+        for (int i=0;i<5;++i) std::getline(ss_readline,s,',');
         std::stringstream(s) >> px;
         
         series.insert(std::pair<boost::gregorian::date,double>(boost::gregorian::from_us_string(date),px));
@@ -44,15 +46,14 @@ void parse_csv(std::string csvPath, std::map<boost::gregorian::date,double>& ser
 // Struct StockPool object given a ticker list
 class StockPool {
 private:
-    std::map< std::string, asset* > stocks; // Individual stocks
+    std::map< std::string, Stock* > stocks; // Individual stocks
     int size; // number of stocks
-    std::vector<boost::gregorian::date> dateSeries; // records dates
 public:
-    StockPool(std::vector<std::string> tickerList): size{tickerList.size()} {
+    StockPool(std::vector<std::string> tickerList): size{(int)tickerList.size()} {
         
         for (auto itr=tickerList.begin();itr!=tickerList.end();++itr) {
             
-            asset* p=new asset;
+            Stock* p=new Stock;
             
             std::string path=dataFolder;
             
@@ -61,13 +62,7 @@ public:
             parse_csv(path.append(*itr).append(".csv"), thisPxData);
             
             p->set_price(thisPxData);
-            stocks.insert(std::pair<std::string, asset*>(*itr,p));
-            
-            if (itr==tickerList.begin()) {
-                for (auto itr2=thisPxData.begin();itr2!=thisPxData.end(),++itr2) {
-                    dateSeries.push_back(itr2->first)
-                }
-            }
+            stocks.insert(std::pair<std::string, Stock*>(*itr,p));
             
         }
         
@@ -75,7 +70,7 @@ public:
     
     ~StockPool() {
         for (auto itr=stocks.begin();itr!=stocks.end();++itr) {
-            asset* p= itr->second;
+            Stock* p= itr->second;
             delete p;
         }
     }
@@ -89,14 +84,40 @@ public:
         return stockList;
     }
     
-    // get specific asset object of a given ticker as an pointer
-    const asset* getStock(std::string ticker) const {
-        return this->stocks.at(ticker)
+    // get specific Stock object of a given ticker as an pointer
+    const Stock* getStock(std::string ticker) const {
+        return this->stocks.at(ticker);
     }
     
-    std::vector<boost::gregorian::date> getDateSeries() const { return dateSeries; }
     
+    std::vector<boost::gregorian::date> getTradingDates(boost::gregorian::date start, boost::gregorian::date end) const {
+        
+        std::map<boost::gregorian::date, double> pxData=(stocks.begin()->second)->get_price();
+        auto itr_start=pxData.lower_bound(start);
+        auto itr_end=pxData.upper_bound(end);
+        std::vector<boost::gregorian::date> tradingDates;
+        std::map<boost::gregorian::date, double>::iterator itr;
+        for (itr=itr_start;itr!=itr_end;++itr) tradingDates.push_back(itr->first);
+        return tradingDates;
+        
+    }
     
+    gsl_matrix* getPrice(std::vector<std::string> tickers, boost::gregorian::date start, boost::gregorian::date end) const {
+        size_t ncol=tickers.size();
+        
+        std::vector<boost::gregorian::date> tradingDates=this->getTradingDates(start,end);
+        size_t nrow=tradingDates.size();
+        
+        gsl_matrix* priceMatrix=gsl_matrix_alloc(nrow,ncol);
+        for (int j=0;j<ncol;++j) {
+            for (int i=0;i<nrow;++i) {
+                gsl_matrix_set(priceMatrix,i,j,stocks.at(tickers.at(j))->get_price(tradingDates.at(j)));
+            }
+        }
+        
+        return priceMatrix;
+        
+    }
     
 };
 
