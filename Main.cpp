@@ -4,9 +4,9 @@
 #include <set>
 #include <vector>
 #include "Account.hpp"
-#include "Asset.h"
-#include "OptimizeSystem.h"
-#include "StockPool.hpp"
+// #include "Asset.h"
+// #include "OptimizeSystem.h"
+// #include "StockPool.hpp"
 // #include<boost/date_time/gregorian/gregorian.hpp>
 // typedef boost::gregorian::date Date;
 
