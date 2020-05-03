@@ -1,5 +1,6 @@
 # include "Account.hpp"
 # include <math>
+# include <fstream>
 
 // constructor
 Account::Account(double capital, std::vector<std::string>& v): cash(capital), balance(capital) {}
@@ -14,7 +15,7 @@ Account::Account(const Account& a)
 	balance_log = a.balance_log;
 }
 
-Account::update(const Portfolio& p)
+void Account::update(const Portfolio& p)
 {
 	auto d = p.getDate();
 
@@ -49,5 +50,30 @@ Account::update(const Portfolio& p)
 	}
 
 	// cash remaining
-
 }
+
+// write the result to Result.out
+void Account::showTransactions() {
+	fstream myfile;
+	myfile.open("Result.out", fstream::in);
+	if (!myfile.is_open()) {
+		cerr << "Failed to open testmulti to read and wirte\n";
+		return -1;
+	}
+	for (auto iter = transaction_log.begin(); iter != transaction_log.end(); ++iter)
+	{
+		myfile << iter->first << " ";
+		for (auto iter2 = (iter->second).begin(); iter2 != (iter->second).end(); ++iter2)
+		{
+			myfile << iter->first << " ";
+		}
+		myfile << "\n";
+	}
+	myfile.colse();
+}
+
+double Account::maxDropdown()
+{
+	
+}
+

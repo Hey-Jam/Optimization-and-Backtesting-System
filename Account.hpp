@@ -47,7 +47,10 @@ public:
 	// setter
 	void update(const Portfolio&);
 
-	void showTrasaction();   // display trading details
+	// display trading details
+	void showTrasaction();
+
+	// other functions
 	void perfomanceSummary();
 	double maxDropdown();
 	double sharpe();
