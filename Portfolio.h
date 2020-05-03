@@ -6,32 +6,43 @@
 #include<string>
 #include<unordered_map>
 #include<gsl/gsl_vector.h>
+#include"Asset.h"
 
 class Portfolio{
  private:
   boost::gregorian::date t;
-  std::unordered_map<asset*, double> p;
+  std::unordered_map<string, double> p;
   gsl_vector* weights;
-  asset* AssetList;
   
  public:
-  Portfolio(boost::gregorian::date, std::unordered_map<asset*, double>);
-  Portfolio(boost::gregorian::date, asset*, gsl_vector);
-  Portfolio(Portfolio);
-  Portfolio(Portfolio&&);
-  ~Portfolio();
+  // 
+  Portfolio(boost::gregorian::date _t, vector<string>& _tickers, gsl_vector* _weights):
+    t{_t} {
+      size_t num = _weights->size;
+      weights = gsl_vector_alloc(num);
+      gsl_vector_mmcpy(_weights, weights);
 
-  // getter
-  boost::gregorian::date getDate() const { return t;}
-  std::unordered_map<asset*, double> getPortfolio() const { return p;}
-  gsl_vector* getWeights() const{ return weights;}
-  asset* getAssetList() const{ return AssetList;}
+      for(int i=0; i<num; i++){
+	p[_tickers[i]] = gsl_vector_get(weights, i);
+      }
+    }
   
-  // setter
+  ~Portfolio(){
+    gsl_vector_free(weights);
+  }
+
+  
+  // Getter
+  boost::gregorian::date getDate() const { return t;}
+  std::unordered_map<string, double>& getPortfolio() const { return p;}
+  gsl_vector* getWeights() const{ return weights;}
+
+  
+  // Setter
   void setDate(boost::gregorian::date _t) { t=_t;}
 
-  // operation overload
-  double operation[](asset* X){ return p[X];}
+  // Other Operation Overload
+  double operation[](Asset* X){ return p[X];}
 };
 
 #endif
