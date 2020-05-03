@@ -46,6 +46,7 @@ class StockPool {
 private:
     std::map< std::string, asset* > stocks; // Individual stocks
     int size; // number of stocks
+    std::vector<boost::gregorian::date> dateSeries; // records dates
 public:
     StockPool(std::vector<std::string> tickerList): size{tickerList.size()} {
         
@@ -61,6 +62,12 @@ public:
             
             p->set_price(thisPxData);
             stocks.insert(std::pair<std::string, asset*>(*itr,p));
+            
+            if (itr==tickerList.begin()) {
+                for (auto itr2=thisPxData.begin();itr2!=thisPxData.end(),++itr2) {
+                    dateSeries.push_back(itr2->first)
+                }
+            }
             
         }
         
@@ -86,6 +93,10 @@ public:
     const asset* getStock(std::string ticker) const {
         return this->stocks.at(ticker)
     }
+    
+    std::vector<boost::gregorian::date> getDateSeries() const { return dateSeries; }
+    
+    
     
 };
 
