@@ -26,7 +26,7 @@ Portfolio头文件， 需要stock_pool头文件
     + 实例化: StockPool sp(tickerList);
     + 调用数据:
         1. sp.getStock("AAPL") # 返回 asset* , 指向AAPL的实例
-        2. sp.getStock("AAPL")->get_price("2020-04-01") # 返回AAPL 2020-04-01 adj close
+        2. sp.getStock("AAPL")->get_price(日期) # 返回AAPL 该日期 adj close， 日期需是boost:gregorian::date类型
 
 - 待完善:
 1) 是否需要函数来直接返回[start,end]的数据
