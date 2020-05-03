@@ -13,11 +13,11 @@
 #include <string>
 #include <map>
 #include <utility>
-#include "Asset.h"
+#include "asset.h"
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <gsl/gsl_matrix.h>
 
-extern std::string dataFolder;
+extern std::string dataFolder="/Users/jam/desktop/Fordham/Adv C++/Project/testData/";
 
 void setDataFolder(std::string new_path) {dataFolder=new_path;};
 
@@ -34,10 +34,12 @@ void parse_csv(std::string csvPath, std::map<boost::gregorian::date,double>& ser
     while(std::getline(csv,readline)) {
         ss_readline=std::stringstream(readline);
         std::getline(ss_readline,date,',');
-        for (int i=0;i<5;++i) std::getline(ss_readline,s,',');
+        for (int i=0;i<5;++i) {
+            std::getline(ss_readline,s,',');
+        }
         std::stringstream(s) >> px;
         
-        series.insert(std::pair<boost::gregorian::date,double>(boost::gregorian::from_us_string(date),px));
+        series.insert(std::pair<boost::gregorian::date,double>(boost::gregorian::from_simple_string(date),px));
     }
     csv.close();
 }
@@ -47,9 +49,9 @@ void parse_csv(std::string csvPath, std::map<boost::gregorian::date,double>& ser
 class StockPool {
 private:
     std::map< std::string, Stock* > stocks; // Individual stocks
-    int size; // number of stocks
+    std::size_t size; // number of stocks
 public:
-    StockPool(std::vector<std::string> tickerList): size{(int)tickerList.size()} {
+    StockPool(std::vector<std::string> tickerList): size{tickerList.size()} {
         
         for (auto itr=tickerList.begin();itr!=tickerList.end();++itr) {
             
@@ -75,7 +77,7 @@ public:
         }
     }
     
-    int getSize() const { return size;}
+    std::size_t getSize() const { return size;}
     
     // get stocks name list in the StockPool as a vector<string>
     std::vector<std::string> getStockList() const {
@@ -111,7 +113,7 @@ public:
         gsl_matrix* priceMatrix=gsl_matrix_alloc(nrow,ncol);
         for (int j=0;j<ncol;++j) {
             for (int i=0;i<nrow;++i) {
-                gsl_matrix_set(priceMatrix,i,j,stocks.at(tickers.at(j))->get_price(tradingDates.at(j)));
+                gsl_matrix_set(priceMatrix,i,j,stocks.at(tickers.at(j))->get_price(tradingDates.at(i)));
             }
         }
         
