@@ -1,13 +1,8 @@
 # include "Account.hpp"
+# include <math>
 
 // constructor
-Account::Account(double capital, std::vector<std::string>& v): cash(capital), balance(capital)
-{
-	for (auto it = v.begin(); it != v.end(); ++it)
-	{
-		pos[*it] = 0;
-	}
-}
+Account::Account(double capital, std::vector<std::string>& v): cash(capital), balance(capital) {}
 
 // copy constructor
 Account::Account(const Account& a)
@@ -25,29 +20,32 @@ Account::update(const Portfolio& p)
 
 	// calculate current balance
 	double balance_new = 0;
+
 	// need access to data
 	balance = balance_new;
 
-	// calculate new position
-	std::unordered_map<std::string, int> pos_new;
-	// need access to portfolio weights
+	// update balance log
+	balance_log[d] = balance_new;	// update balance log
 
 	// clacuate trasactions need to be done
-	if (pos == pos_new) {
-		balance[d] = balance_new;
-	}
-	else {
+	if (w != w_new) {
+		// weights changed
+		// calculate new position
+		std::unordered_map<std::string, int> pos_new;
+		// need access to portfolio weights
+
 		std::unordered_map<std::string, int> operation = pos_new - pos;
 		pos = pos_new;	// update local position book
-		variVec log;	// save different data type into a vector
+
 		for (auto itr = operation.begin(); itr != operation.end(); ++itr)
 		{
-			if(operation[itr]!=0) {
+			if (operation[itr] != 0) {
 				// need access to data
-				operation[itr]
+				double transaction = itr->second * Stock[itr->frist];
+				// upload transaction
+				transaction_log[d] = variVec {itr->first, abs(itr->second), price, transaction};	// save different data type into a vector
 			}
 		}
-
 	}
 
 	// cash remaining

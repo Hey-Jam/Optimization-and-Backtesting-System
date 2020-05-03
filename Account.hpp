@@ -30,6 +30,7 @@ private:
 	double cash;	// cash account, only update when there is a transaction
 	double balance;	// update every tick
 	std::unordered_map<std::string, int> pos;	// record each ticker and its shares in the portfolio;
+	std::unordered_map<std::string, double> w;	// weights
 	std::map<Date, variVec> transaction_log;
 	std::map<Date, double> balance_log;
 
