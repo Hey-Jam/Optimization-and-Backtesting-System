@@ -20,6 +20,7 @@ Account class is designed to rocord all the trading details while backtesting or
 #include <boost/variant.hpp>
 #include <vector>
 #include "Portfolio.h"
+#include "StockPool.hpp"
 
 typedef boost::gregorian::date Date;
 typedef std::vector<boost::variant<int, std::string, double>> variVec;
@@ -29,13 +30,14 @@ class Account
 private:
 	double cash;	// cash account, only update when there is a transaction
 	double balance;	// update every tick
+	StockPool* sp;
 	std::unordered_map<std::string, int> pos;	// record each ticker and its shares in the portfolio;
 	std::unordered_map<std::string, double> w;	// weights
 	std::map<Date, variVec> transaction_log;
 	std::map<Date, double> balance_log;
 
 public:
-	Account(Date,Date,double,std::vector<std::string>);
+	Account(Date, Date, double, std::vector<std::string>);
 	Account(const Account&);
 
 	// getter
@@ -45,18 +47,20 @@ public:
 	const std::map<Date, double>* getBalanceLog() const {return balance_log;}
 
 	// setter
-	void update(const Portfolio&);
+	void update(const Portfolio*);
 
 	// display trading details
 	void showTrasaction();
 
 	// other functions
 	void perfomanceSummary();
-	double maxDropdown();
 	double sharpe();
 	double volatility();
 	double alpha();
 	double beta();
+
+	// operator overloade
+	friend std::unordered_map<std::string, int> operator-( const std::unordered_map<std::string, int> &, const std::unordered_map<std::string, int> &);
 };
 
 #endif // ACCOUNT_CPP

@@ -3,7 +3,7 @@
 # include <fstream>
 
 // constructor
-Account::Account(double capital, std::vector<std::string>& v): cash(capital), balance(capital) {}
+Account::Account(double capital, std::vector<std::string>& v, SotckPool* s): cash(capital), balance(capital), sp(s) {}
 
 // copy constructor
 Account::Account(const Account& a)
@@ -13,38 +13,44 @@ Account::Account(const Account& a)
 	pos = a.pos;
 	transaction_log = a.transaction_log;
 	balance_log = a.balance_log;
+	sp = a.sp;
 }
 
-void Account::update(const Portfolio& p)
+void Account::update(const Portfolio* p)
 {
-	auto d = p.getDate();
+	Date d = p->getDate();
 
 	// calculate current balance
 	double balance_new = 0;
-
-	// need access to data
+	for (auto iter = pos.begin(); iter != pos.end(); ++iter) {
+		balance_new += sp->getStock(iter->first)->get_price(d) * iter->second
+	}
 	balance = balance_new;
 
 	// update balance log
 	balance_log[d] = balance_new;	// update balance log
 
-	// clacuate trasactions need to be done
+	// update transaction log
+	std::unordered_map<std::string, double> w_new = p->getPortfolio();
 	if (w != w_new) {
 		// weights changed
+
 		// calculate new position
 		std::unordered_map<std::string, int> pos_new;
-		// need access to portfolio weights
+		for (auto iter = pos.begin(); iter != pos.end(); ++iter) {
+			pos_new[iter->first] = int(sp->getStock(iter->first)->get_price(d) * w_new[iter->first]);
+		}
 
+		// need access to portfolio weights
 		std::unordered_map<std::string, int> operation = pos_new - pos;
 		pos = pos_new;	// update local position book
 
 		for (auto itr = operation.begin(); itr != operation.end(); ++itr)
 		{
 			if (operation[itr] != 0) {
-				// need access to data
-				double transaction = itr->second * Stock[itr->frist];
-				// upload transaction
-				transaction_log[d] = variVec {itr->first, abs(itr->second), price, transaction};	// save different data type into a vector
+				double transaction = itr->second * sp->getStock(itr->first)->get_price(d);
+				// upload transaction log
+				transaction_log[d] = variVec {itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction};	// save different data type into a vector
 			}
 		}
 	}
@@ -52,14 +58,16 @@ void Account::update(const Portfolio& p)
 	// cash remaining
 }
 
-// write the result to Result.out
+// write the result to Transactions.out
 void Account::showTransactions() {
 	fstream myfile;
-	myfile.open("Result.out", fstream::in);
+	myfile.open("Transactions.out", fstream::in);
 	if (!myfile.is_open()) {
 		cerr << "Failed to open testmulti to read and wirte\n";
 		return -1;
 	}
+	myfile << "Transaction Log" << endl;
+	myfile << "DATE   TICKER   SHARES   PRICE   CASHFLOW" << endl;
 	for (auto iter = transaction_log.begin(); iter != transaction_log.end(); ++iter)
 	{
 		myfile << iter->first << " ";
@@ -72,8 +80,8 @@ void Account::showTransactions() {
 	myfile.colse();
 }
 
-double Account::maxDropdown()
-{
-	
+// map opearator overload
+friend std::unordered_map<std::string, int> operator-( const std::unordered_map<std::string, int> &W1, const std::unordered_map<std::string, int> &W2){
+
 }
 
