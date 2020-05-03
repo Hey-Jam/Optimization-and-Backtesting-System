@@ -1,0 +1,24 @@
+{
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"x-terminal-emulator",
+				"-e",
+				"bash",
+				"-c",
+				"g++ Account.cpp Main.cpp -lboost_date_time -o main; read -p 'Press any key to continue...'"
+			],
+			"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+			"name": "Project Build",
+			"working_dir": "$folder"
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
+}

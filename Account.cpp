@@ -1,5 +1,5 @@
 # include "Account.hpp"
-# include <math>
+# include <cmath>
 # include <fstream>
 
 // constructor
@@ -81,7 +81,18 @@ void Account::showTransactions() {
 }
 
 // map opearator overload
-friend std::unordered_map<std::string, int> operator-( const std::unordered_map<std::string, int> &W1, const std::unordered_map<std::string, int> &W2){
+friend std::unordered_map<std::string, int> operator - ( const std::unordered_map<std::string, int> &p_new, const std::unordered_map<std::string, int> &p){
+	std::unordered_map<std::string, int> res;
 
+	for (auto iter = p_new.begin(); iter != p_new.end(); ++iter) {
+		res[iter->first] = iter->second - p[iter->frist]
+	}
+
+	// sell out tickers in pos_old but not in pos_new
+	for (auto iter = p.begin(); iter != p.end(); ++iter) {
+		if(p_new[iter->first]==0) {
+			res[iter->first] = -iter->second
+		}
+	}
 }
 

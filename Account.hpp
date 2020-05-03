@@ -44,7 +44,7 @@ public:
 	const double getCash() const {return cash;}
 	const double getBalance() const {return balance;}
 	const std::unordered_map<std::string, int> getPosition() const {return pos;}
-	const std::map<Date, double>* getBalanceLog() const {return balance_log;}
+	const std::map<Date, double> getBalanceLog() const {return balance_log;}
 
 	// setter
 	void update(const Portfolio*);
@@ -53,11 +53,11 @@ public:
 	void showTrasaction();
 
 	// other functions
-	void perfomanceSummary();
-	double sharpe();
-	double volatility();
-	double alpha();
-	double beta();
+	// void perfomanceSummary();
+	// double sharpe();
+	// double volatility();
+	// double alpha();
+	// double beta();
 
 	// operator overloade
 	friend std::unordered_map<std::string, int> operator-( const std::unordered_map<std::string, int> &, const std::unordered_map<std::string, int> &);
