@@ -18,6 +18,7 @@ std::unordered_map<std::string, int> operator - ( const std::unordered_map<std::
 			res[iter->first] = -iter->second;
 		}
 	}
+	return res;
 }
 
 // constructor
@@ -82,7 +83,7 @@ void Account::showTransaction() {
 	myfile.open("Transactions.out", fstream::in);
 	if (!myfile.is_open()) {
 		cerr << "Failed to open testmulti to read and wirte\n";
-		throw -1;
+		throw - 1;
 	}
 	myfile << "Transaction Log" << endl;
 	myfile << "DATE   TICKER   SHARES   PRICE   CASHFLOW" << endl;
