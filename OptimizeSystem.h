@@ -65,19 +65,19 @@ public:
     gsl_vector *expectreturn = gsl_vector_alloc(num);
 
     // BUG2 not fixed 2020-05-03 20:37 报错如下
-    // for (int i = 0; i < tickers.size(); i++) {
+    for (int i = 0; i < tickers.size(); i++) {
 
-    //   gsl_vector_view R1 = gsl_matrix_column(closereturn, i);
-    //   gsl_vector_set(expectreturn, i, gsl_stats_mean(&R1.vector->data, date_length));
+      gsl_vector_view R1 = gsl_matrix_column(closereturn, i);
+      gsl_vector_set(expectreturn, i, gsl_stats_mean(&R1.vector->data, date_length));
 
-    //   for (int j = 0; j <= i; j++) {
-    //     gsl_vector_view R2 = gsl_matrix_column(closereturn, j);
+      for (int j = 0; j <= i; j++) {
+        gsl_vector_view R2 = gsl_matrix_column(closereturn, j);
 
-    //     double sigma_ij = gsl_stats_covariance(&R1.vector->data, &R2.vector->data);
-    //     gsl_matrix_set(cov, i, j, sigma_ij);
-    //     if (i != j) gsl_matrix_set(cov, j, i, sigma_ij);
-    //   }
-    // }
+        double sigma_ij = gsl_stats_covariance(&R1.vector->data, &R2.vector->data);
+        gsl_matrix_set(cov, i, j, sigma_ij);
+        if (i != j) gsl_matrix_set(cov, j, i, sigma_ij);
+      }
+    }
 
     double *p = new double[num + num * num];
     memcpy(p, expectreturn->data, num);

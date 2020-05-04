@@ -2,6 +2,24 @@
 # include <cmath>
 # include <fstream>
 
+// map opearator overload
+std::unordered_map<std::string, int> operator - ( const std::unordered_map<std::string, int> &p_new, const std::unordered_map<std::string, int> &p) {
+	std::unordered_map<std::string, int> res;
+	std::unordered_map<std::string, int> p_new_(p_new);
+	std::unordered_map<std::string, int> p_(p);
+
+	for (auto iter = p_new_.begin(); iter != p_new_.end(); ++iter) {
+		res[iter->first] = iter->second - p_[iter->first];
+	}
+
+	// sell out tickers in pos_old but not in pos_new
+	for (auto iter = p_.begin(); iter != p_.end(); ++iter) {
+		if (p_new_[iter->first] == 0) {
+			res[iter->first] = -iter->second;
+		}
+	}
+}
+
 // constructor
 Account::Account(double capital, std::vector<std::string>& v, StockPool* s): cash(capital), balance(capital), sp(s) {}
 
@@ -23,7 +41,7 @@ void Account::update(const Portfolio* p)
 	// calculate current balance
 	double balance_new = 0;
 	for (auto iter = pos.begin(); iter != pos.end(); ++iter) {
-		balance_new += sp->getStock(iter->first)->get_price(d) * iter->second
+		balance_new += sp->getStock(iter->first)->get_price(d) * iter->second;
 	}
 	balance = balance_new;
 
@@ -47,7 +65,7 @@ void Account::update(const Portfolio* p)
 
 		for (auto itr = operation.begin(); itr != operation.end(); ++itr)
 		{
-			if (operation[itr] != 0) {
+			if (itr->second != 0) {
 				double transaction = itr->second * sp->getStock(itr->first)->get_price(d);
 				// upload transaction log
 				transaction_log[d] = variVec {itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction};	// save different data type into a vector
@@ -59,12 +77,12 @@ void Account::update(const Portfolio* p)
 }
 
 // write the result to Transactions.out
-void Account::showTransactions() {
+void Account::showTransaction() {
 	fstream myfile;
 	myfile.open("Transactions.out", fstream::in);
 	if (!myfile.is_open()) {
 		cerr << "Failed to open testmulti to read and wirte\n";
-		return -1;
+		throw -1;
 	}
 	myfile << "Transaction Log" << endl;
 	myfile << "DATE   TICKER   SHARES   PRICE   CASHFLOW" << endl;
@@ -77,22 +95,7 @@ void Account::showTransactions() {
 		}
 		myfile << "\n";
 	}
-	myfile.colse();
+	myfile.close();
 }
 
-// map opearator overload
-friend std::unordered_map<std::string, int> operator - ( const std::unordered_map<std::string, int> &p_new, const std::unordered_map<std::string, int> &p){
-	std::unordered_map<std::string, int> res;
-
-	for (auto iter = p_new.begin(); iter != p_new.end(); ++iter) {
-		res[iter->first] = iter->second - p[iter->frist]
-	}
-
-	// sell out tickers in pos_old but not in pos_new
-	for (auto iter = p.begin(); iter != p.end(); ++iter) {
-		if(p_new[iter->first]==0) {
-			res[iter->first] = -iter->second
-		}
-	}
-}
 

@@ -3,7 +3,7 @@
 #include <map>
 #include <set>
 #include <vector>
-//#include "Account.hpp"
+#include "Account.hpp"
 #include "asset.h"
 // #include "OptimizeSystem.h"
 #include "StockPool.hpp"
@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 
 	// // set datapath and stockpool
 	// setDataFolder("./testdata/");
-	// StockPool sp = StockPool(tickerList);
+	// StockPool sp = StockPool(tickerLit);
 
 	// std::cout << "size: " << sp.getSize() << "\n";
 

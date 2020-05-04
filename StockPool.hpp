@@ -17,9 +17,10 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <gsl/gsl_matrix.h>
 
-extern std::string dataFolder = "";
+// extern std::string dataFolder = "";
+std::string dataFolder = "./testdata/";
 
-void setDataFolder(std::string new_path) {dataFolder = new_path;};
+// void setDataFolder(std::string new_path) {dataFolder = new_path;};
 
 // Extract dates and Adj Close from csv file
 void parse_csv(std::string csvPath, std::map<boost::gregorian::date, double>& series) {

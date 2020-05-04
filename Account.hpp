@@ -37,7 +37,7 @@ private:
 	std::map<Date, double> balance_log;
 
 public:
-	Account(Date, Date, double, std::vector<std::string>);
+	Account(double, std::vector<std::string>&, StockPool*);
 	Account(const Account&);
 
 	// getter
@@ -50,7 +50,7 @@ public:
 	void update(const Portfolio*);
 
 	// display trading details
-	void showTrasaction();
+	void showTransaction();
 
 	// other functions
 	// void perfomanceSummary();
