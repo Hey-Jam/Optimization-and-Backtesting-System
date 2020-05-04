@@ -125,7 +125,7 @@ public:
 */
 
 // Extract dates and Adj Close from csv file
-void parse_csv(std::string csvPath, std::map<boost::gregorian::date, double>& series);
+// void parse_csv(std::string csvPath, std::map<boost::gregorian::date, double>& series);
 
 
 // Struct StockPool object given a ticker list

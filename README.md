@@ -51,4 +51,9 @@ Yimin:
     // OptimizeSystem.h:75:76: error: base operand of ‘->’ has non-pointer type ‘gsl_vector’
     //      double sigma_ij = gsl_stats_covariance(&R1.vector->data, &R2.vector->data);
     //                                                                         ^~
-- 
+
+----------------
+2020-05-04 17:27
+debug完毕
+Transactions.out为输出的交易记录.
+

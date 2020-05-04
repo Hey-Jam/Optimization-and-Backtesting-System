@@ -1,4 +1,4 @@
-#ifndef PORTFOLIO
+﻿#ifndef PORTFOLIO
 #define PORTFOLIO
 
 #include<iostream>
@@ -21,7 +21,7 @@ public:
     size_t num = _weights->size;
     weights = gsl_vector_alloc(num);
     // gsl_vector_mmcpy(_weights, weights); 2020-05-03 16:10 BUG1
-    gsl_vector_memcpy(_weights, weights);
+    gsl_vector_memcpy(weights, _weights);
     for (int i = 0; i < num; i++) {
       p[_tickers[i]] = gsl_vector_get(weights, i);
     }

@@ -23,7 +23,7 @@ Account class is designed to rocord all the trading details while backtesting or
 #include "StockPool.hpp"
 
 typedef boost::gregorian::date Date;
-typedef std::vector<boost::variant<int, std::string, double>> variVec;
+typedef std::vector<boost::variant<Date,int, std::string, double>> variVec;
 
 class Account
 {
@@ -33,7 +33,7 @@ private:
 	StockPool* sp;
 	std::unordered_map<std::string, int> pos;	// record each ticker and its shares in the portfolio;
 	std::unordered_map<std::string, double> w;	// weights
-	std::map<Date, variVec> transaction_log;
+	std::vector<variVec> transaction_log;
 	std::map<Date, double> balance_log;
 
 public:
@@ -45,6 +45,7 @@ public:
 	const double getBalance() const {return balance;}
 	const std::unordered_map<std::string, int> getPosition() const {return pos;}
 	const std::map<Date, double> getBalanceLog() const {return balance_log;}
+	const std::vector<variVec> getTransaction() const {return transaction_log;}
 
 	// setter
 	void update(const Portfolio*);

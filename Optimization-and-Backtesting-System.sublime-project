@@ -8,7 +8,7 @@
 				"-e",
 				"bash",
 				"-c",
-				"g++ -g Main.cpp Account.cpp CSV_Parser.cpp StockPool.cpp -lboost_date_time -lgsl -lgslcblas -o main.out; read -p 'Press any key to continue...'"
+				"g++ -g Main.cpp Account.cpp CSV_Parser.cpp StockPool.cpp -lboost_date_time -lgsl -lgslcblas -o main.out && ./main.out; read -p 'Press any key to continue...'"
 			],
 			"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
 			"name": "Project Build",

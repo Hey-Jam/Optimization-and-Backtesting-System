@@ -39,6 +39,37 @@ void Account::update(const Portfolio* p)
 {
 	Date d = p->getDate();
 
+	// update transaction log and local position
+	std::unordered_map<std::string, double> w_new = p->getPortfolio();
+	if (w != w_new) {
+		// weights changed
+		// calculate new position
+		std::unordered_map<std::string, int> pos_new;
+		for (auto iter = w_new.begin(); iter != w_new.end(); ++iter) {
+			pos_new[iter->first] = (int)(sp->getStock(iter->first)->get_price(d) * iter->second);
+		}
+
+		// calcualte operation book
+		std::unordered_map<std::string, int> operation = pos_new - pos;
+		// for (auto iter = operation.begin(); iter != operation.end(); ++iter)
+		// {
+		// 	std::cout << iter->first << " " << iter->second << std::endl;
+		// }
+		pos = pos_new;	// update local position book
+
+		// upload transaction log
+		for (auto itr = operation.begin(); itr != operation.end(); ++itr)
+		{
+			if (itr->second != 0) {
+				double transaction = itr->second * sp->getStock(itr->first)->get_price(d);
+				transaction_log.push_back(variVec {d,itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction});	// save different data type into a vector
+			}
+		}
+
+		// update weights
+		w = w_new;
+	}
+
 	// calculate current balance
 	double balance_new = 0;
 	for (auto iter = pos.begin(); iter != pos.end(); ++iter) {
@@ -49,38 +80,13 @@ void Account::update(const Portfolio* p)
 	// update balance log
 	balance_log[d] = balance_new;	// update balance log
 
-	// update transaction log
-	std::unordered_map<std::string, double> w_new = p->getPortfolio();
-	if (w != w_new) {
-		// weights changed
-
-		// calculate new position
-		std::unordered_map<std::string, int> pos_new;
-		for (auto iter = pos.begin(); iter != pos.end(); ++iter) {
-			pos_new[iter->first] = int(sp->getStock(iter->first)->get_price(d) * w_new[iter->first]);
-		}
-
-		// need access to portfolio weights
-		std::unordered_map<std::string, int> operation = pos_new - pos;
-		pos = pos_new;	// update local position book
-
-		for (auto itr = operation.begin(); itr != operation.end(); ++itr)
-		{
-			if (itr->second != 0) {
-				double transaction = itr->second * sp->getStock(itr->first)->get_price(d);
-				// upload transaction log
-				transaction_log[d] = variVec {itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction};	// save different data type into a vector
-			}
-		}
-	}
-
 	// cash remaining
 }
 
 // write the result to Transactions.out
 void Account::showTransaction() {
 	fstream myfile;
-	myfile.open("Transactions.out", fstream::in);
+	myfile.open("Transactions.out", fstream::out);
 	if (!myfile.is_open()) {
 		cerr << "Failed to open testmulti to read and wirte\n";
 		throw - 1;
@@ -89,10 +95,10 @@ void Account::showTransaction() {
 	myfile << "DATE   TICKER   SHARES   PRICE   CASHFLOW" << endl;
 	for (auto iter = transaction_log.begin(); iter != transaction_log.end(); ++iter)
 	{
-		myfile << iter->first << " ";
-		for (auto iter2 = (iter->second).begin(); iter2 != (iter->second).end(); ++iter2)
+		// myfile << iter->first << " ";
+		for (auto iter2 = (*iter).begin(); iter2 != (*iter).end(); ++iter2)
 		{
-			myfile << iter->first << " ";
+			myfile << *iter2 << " ";
 		}
 		myfile << "\n";
 	}
