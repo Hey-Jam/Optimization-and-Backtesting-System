@@ -44,7 +44,7 @@ double Sharp(const gsl_vector * weights, void *params) {
 
 class OptimizeSystem {
 public:
-    virtual Account optimize(vector<string>) = 0;
+    virtual Portfolio* optimize(vector<string>& tickers, boost::gregorian::date Start, boost::gregorian::date End) = 0;
 };
 
 class ClassicMarkowitz : public OptimizeSystem {
@@ -60,7 +60,7 @@ public:
     // getter
     // int getSize() const { return stockpool.getsize();} // BUG1 2020-05-03 20:27 hongfei
     const int getSize() const { return stockpool->getSize();}
-    const Portfolio* optimize(vector<string>& tickers, boost::gregorian::date Start, boost::gregorian::date End) const {
+    Portfolio* optimize(vector<string>& tickers, boost::gregorian::date Start, boost::gregorian::date End) {
         /* the main function of ClassicMarkowitz class, implement the optimization with Markowitz method */
 
         gsl_matrix *closeprice = stockpool->getPrice(tickers, Start, End); // this part needed to be completed by Jam, column is the ticker, row is the date
