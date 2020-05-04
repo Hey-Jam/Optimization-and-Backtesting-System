@@ -6,7 +6,7 @@
 #include<string>
 #include<unordered_map>
 #include<gsl/gsl_vector.h>
-#include"Asset.h"
+#include"asset.h"
 
 class Portfolio {
 private:

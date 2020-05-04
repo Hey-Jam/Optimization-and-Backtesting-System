@@ -3,7 +3,7 @@
 # include <fstream>
 
 // constructor
-Account::Account(double capital, std::vector<std::string>& v, SotckPool* s): cash(capital), balance(capital), sp(s) {}
+Account::Account(double capital, std::vector<std::string>& v, StockPool* s): cash(capital), balance(capital), sp(s) {}
 
 // copy constructor
 Account::Account(const Account& a)

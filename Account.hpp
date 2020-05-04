@@ -16,7 +16,7 @@ Account class is designed to rocord all the trading details while backtesting or
 #include <iostream>
 #include <map>
 #include <unordered_map>
-#include<boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/variant.hpp>
 #include <vector>
 #include "Portfolio.h"

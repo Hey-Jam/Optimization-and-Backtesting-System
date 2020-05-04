@@ -31,3 +31,24 @@ Portfolio头文件， 需要stock_pool头文件
 - 待完善:
 1) 是否需要函数来直接返回[start,end]的数据
 2) 是否考虑缺失值处理的问题
+
+----------------------
+2020-05-03 20:38
+debug记录
+
+在所有有修改的地方我有标注BUG关键字,大家可以用来定位查找,下面记录一些未解决的bug:
+Yimin:
+- OptimizeSystem 67-80
+    // BUG2 not fixed 2020-05-03 20:37 报错如下
+    // In file included from Main.cpp:8:0:
+    // OptimizeSystem.h: In member function ‘const Portfolio* ClassicMarkowitz::optimize(std::vector<std::__cxx11::basic_string<char> >&, boost::gregorian::date, boost::gregorian::date) const’:
+    // OptimizeSystem.h:70:64: error: base operand of ‘->’ has non-pointer type ‘gsl_vector’
+    //        gsl_vector_set(expectreturn, i, gsl_stats_mean(&R1.vector->data, date_length));
+    //                                                                 ^~
+    // OptimizeSystem.h:75:58: error: base operand of ‘->’ has non-pointer type ‘gsl_vector’
+    //          double sigma_ij = gsl_stats_covariance(&R1.vector->data, &R2.vector->data);
+    //                                                           ^~
+    // OptimizeSystem.h:75:76: error: base operand of ‘->’ has non-pointer type ‘gsl_vector’
+    //      double sigma_ij = gsl_stats_covariance(&R1.vector->data, &R2.vector->data);
+    //                                                                         ^~
+- 
