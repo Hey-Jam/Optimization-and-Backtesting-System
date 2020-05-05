@@ -62,7 +62,7 @@ void Account::update(const Portfolio* p)
 		{
 			if (itr->second != 0) {
 				double transaction = itr->second * sp->getStock(itr->first)->get_price(d);
-				transaction_log.push_back(variVec {d,itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction});	// save different data type into a vector
+				transaction_log.push_back(variVec {d, itr->first, abs(itr->second), sp->getStock(itr->first)->get_price(d), transaction});	// save different data type into a vector
 			}
 		}
 
@@ -102,6 +102,15 @@ void Account::showTransaction() {
 		}
 		myfile << "\n";
 	}
+	myfile << "-------------------------" << endl;
+	myfile << "Balance Log" << endl;
+	for (auto iter2 = balance_log.begin(); iter2 != balance_log.end(); ++iter2)
+	{
+		myfile << iter2->first << "   " << iter2->second << endl;
+	}
+
+
+
 	myfile.close();
 }
 
