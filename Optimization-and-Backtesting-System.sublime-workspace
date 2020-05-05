@@ -101,10 +101,28 @@
 			}
 		},
 		{
+			"file": "Main.cpp",
+			"settings":
+			{
+				"buffer_size": 1919,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Portfolio.h",
+			"settings":
+			{
+				"buffer_size": 1431,
+				"encoding": "UTF-8 with BOM",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "StockPool.hpp",
 			"settings":
 			{
-				"buffer_size": 4880,
+				"buffer_size": 4883,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -122,7 +140,8 @@
 			"file": "Account.hpp",
 			"settings":
 			{
-				"buffer_size": 2255,
+				"buffer_size": 2334,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -130,8 +149,8 @@
 			"file": "OptimizeSystem.h",
 			"settings":
 			{
-				"buffer_size": 6101,
-				"encoding": "UTF-8",
+				"buffer_size": 6299,
+				"encoding": "UTF-8 with BOM",
 				"line_ending": "Unix"
 			}
 		},
@@ -139,7 +158,7 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 2252,
+				"buffer_size": 2320,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -166,7 +185,7 @@
 			"file": "Account.cpp",
 			"settings":
 			{
-				"buffer_size": 2945,
+				"buffer_size": 3136,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -628,7 +647,7 @@
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 31.0
 	},
 	"find_in_files":
 	{
@@ -642,6 +661,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"balance",
+			"cout",
+			"sell",
+			"parse",
 			"std",
 			"dataFolder",
 			"DataFolder",
@@ -688,8 +711,8 @@
 						"selection":
 						[
 							[
-								38,
-								38
+								314,
+								314
 							]
 						],
 						"settings":
@@ -701,24 +724,24 @@
 								{
 									"1":
 									[
-										388,
-										389
+										315,
+										316
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"region.purplish"
+										"Packages/BracketHighlighter/icons/square_bracket.png",
+										"region.bluish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										25,
-										26
+										311,
+										312
 									]
 								},
 								"unmatched":
@@ -792,6 +815,109 @@
 					},
 					"stack_index": 0,
 					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1386.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
 				}
 			]
 		},
@@ -800,20 +926,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "StockPool.hpp",
+					"buffer": 2,
+					"file": "Portfolio.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4880,
+						"buffer_size": 1431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4656,
-								4656
+								963,
+								963
 							]
 						],
 						"settings":
@@ -825,15 +951,134 @@
 								{
 									"1":
 									[
-										4713,
-										4714
+										1420,
+										1421
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										209,
+										210
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
+							],
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 660.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "StockPool.hpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3903,
+								3903
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										4857,
+										4862
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/hash.png",
 										"region.yellowish"
 									]
 								},
@@ -841,8 +1086,8 @@
 								{
 									"1":
 									[
-										4656,
-										4657
+										262,
+										268
 									]
 								},
 								"unmatched":
@@ -912,14 +1157,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2550.0,
+						"translation.y": 1674.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "CSV_Parser.hpp",
 					"semi_transient": false,
 					"settings":
@@ -1015,27 +1260,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 255.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "Account.hpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2255,
+						"buffer_size": 2334,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								978,
-								978
+								883,
+								883
 							]
 						],
 						"settings":
@@ -1047,8 +1292,8 @@
 								{
 									"1":
 									[
-										2234,
-										2239
+										2313,
+										2318
 									]
 								},
 								"icon":
@@ -1133,27 +1378,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 766.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "OptimizeSystem.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6101,
+						"buffer_size": 6299,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2682,
-								2682
+								4316,
+								4316
 							]
 						],
 						"settings":
@@ -1163,20 +1408,30 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										6284,
+										6285
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
+									]
 								},
 								"open":
-								{
-								},
-								"unmatched":
 								{
 									"1":
 									[
 										1800,
 										1801
 									]
+								},
+								"unmatched":
+								{
 								}
 							},
 							"bracket_highlighter.regions":
@@ -1242,10 +1497,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1541.0,
+						"translation.y": 2106.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1255,20 +1510,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2252,
+						"buffer_size": 2320,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								265,
-								265
+								131,
+								131
 							]
 						],
 						"settings":
@@ -1357,10 +1612,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 148.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1370,7 +1625,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "StockPool.cpp",
 					"semi_transient": false,
 					"settings":
@@ -1382,8 +1637,8 @@
 						"selection":
 						[
 							[
-								1234,
-								1234
+								1508,
+								1508
 							]
 						],
 						"settings":
@@ -1395,24 +1650,24 @@
 								{
 									"1":
 									[
-										1259,
-										1260
+										1664,
+										1665
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"region.yellowish"
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										1192,
-										1193
+										1361,
+										1362
 									]
 								},
 								"unmatched":
@@ -1482,14 +1737,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 837.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "CSV_Parser.cpp",
 					"semi_transient": false,
 					"settings":
@@ -1589,24 +1844,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "Account.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2945,
+						"buffer_size": 3136,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								536,
-								536
+								2504,
+								2504
 							]
 						],
 						"settings":
@@ -1618,8 +1873,8 @@
 								{
 									"1":
 									[
-										704,
-										705
+										2524,
+										2525
 									]
 								},
 								"icon":
@@ -1634,8 +1889,8 @@
 								{
 									"1":
 									[
-										237,
-										238
+										1075,
+										1076
 									]
 								},
 								"unmatched":
@@ -1704,10 +1959,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1495.0,
+						"translation.y": 1217.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1770,7 +2025,7 @@
 	},
 	"output.exec":
 	{
-		"height": 84.0
+		"height": 32.0
 	},
 	"output.find_results":
 	{
